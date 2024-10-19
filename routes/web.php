@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 Route::get('todos', [TodoController::class, 'getAllTodosWithDetails']);
 Route::get('test', [TodoController::class, 'test']);
+Route::inertia('home', 'Todos/Home');
