@@ -20,4 +20,20 @@ class TodoRepository
     {
         return $this->model->with('todoDetails')->get();
     }
+
+    public function getTodosUsingId(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    public function updateStatusTodoUsingId($status, int $id)
+    {
+        $todo = $this->getTodosUsingId($id);
+
+        if (!$todo) {
+            return false;
+        }
+
+        return $todo->update(['is_finish' => $status]);
+    }
 }

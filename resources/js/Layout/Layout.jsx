@@ -6,8 +6,8 @@ export default function Layout({ children }) {
             <header className="bg-gray-800 text-white p-4">
                 <nav className="flex space-x-4">
                     <Link href="/" className="hover:text-gray-400">Home</Link>
-                    <Link href="/about" className="hover:text-gray-400">About</Link>
-                    <Link href="/contact" className="hover:text-gray-400">Contact</Link>
+                    <Link href="/todos" className="hover:text-gray-400">Todos</Link>
+                    {/* <Link href="/contact" className="hover:text-gray-400">Contact</Link> */}
                 </nav>
             </header>
 

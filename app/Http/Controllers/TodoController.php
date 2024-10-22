@@ -27,4 +27,28 @@ class TodoController extends Controller
             'todos' => $todos
         ]);
     }
+
+    public function show(int $id)
+    {
+        $todo = $this->service->getTodoUsingId($id);
+    }
+
+    public function updateStatus(Request $request, int $id)
+    {
+        $todo = $this->service->updateStatusFinish($request, $id);
+
+        if (!$todo) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Request Failed!',
+                'code' => 500
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Request Success!',
+            'code' => 200
+        ]);
+    }
 }
