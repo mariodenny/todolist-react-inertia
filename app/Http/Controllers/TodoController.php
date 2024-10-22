@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Services\TodoService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TodoController extends Controller
 {
-    public function index()
-    {
-        // 
+    public function __construct(
+        protected TodoService $service
+    ) {
+        $this->service = $service;
     }
 
     public function test()
@@ -18,17 +20,11 @@ class TodoController extends Controller
         return Inertia::render('Test');
     }
 
-    public function getAllTodosWithDetails()
+    public function index()
     {
-        $todos = Todo::with('todoDetails')->get();
-
+        $todos = $this->service->getAllTodos();
         return Inertia::render('Todos/Index', [
             'todos' => $todos
         ]);
-    }
-
-    public function getTodoWithDetails(int $id)
-    {
-        return Todo::with('todoDetails')->findOrFail($id);
     }
 }

@@ -1,8 +1,9 @@
 import { Head } from "@inertiajs/react";
+import Layout from "../../Layout/Layout";
 
 export default function Index({ todos }) {
     return (
-        <>
+        <Layout>
             <Head title="Welcome!" />
             <h1>Todo List!</h1>
             <ul>
@@ -13,6 +14,6 @@ export default function Index({ todos }) {
                     </div>
                 ))}
             </ul>
-        </>
+        </Layout>
     );
 }
