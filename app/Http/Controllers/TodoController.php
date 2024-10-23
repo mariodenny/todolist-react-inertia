@@ -20,6 +20,21 @@ class TodoController extends Controller
         return Inertia::render('Test');
     }
 
+    public function store()
+    {
+        // TODO:add store
+    }
+
+    public function update()
+    {
+        //TODO:add update
+    }
+
+    public function delete()
+    {
+        //TODO:add delete 
+    }
+
     public function index()
     {
         $todos = $this->service->getAllTodos();
