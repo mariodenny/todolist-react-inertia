@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Todo\StoreTodoRequest;
 use App\Repositories\TodoRepository;
 
 class TodoService
@@ -32,5 +33,21 @@ class TodoService
         $status = $request->is_finish;
 
         return $this->repository->updateStatusTodoUsingId($status, $id);
+    }
+
+    public function createTodoData(StoreTodoRequest $request)
+    {
+        $todo = [
+            'task_name' => $request->task_name,
+            'description' => $request->description,
+            'is_finish' => $request->is_finish,
+        ];
+
+        return $this->repository->storeNewTodo($todo);
+    }
+
+    public function deleteTodo(int $id)
+    {
+        return $this->repository->deleteTodo($id);
     }
 }

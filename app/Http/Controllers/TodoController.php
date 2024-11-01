@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Todo\StoreTodoRequest;
 use App\Models\Todo;
 use App\Services\TodoService;
+use App\Trait\InertiaRender;
+use App\Trait\JsonResponser;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TodoController extends Controller
 {
+    use JsonResponser;
+
     public function __construct(
         protected TodoService $service
     ) {
@@ -20,9 +25,15 @@ class TodoController extends Controller
         return Inertia::render('Test');
     }
 
-    public function store()
+    public function store(StoreTodoRequest $request)
     {
-        // TODO:add store
+        $todo = $this->service->createTodoData($request);
+
+        if (!$todo) {
+            return $this->jsonErrorResponse($todo);
+        }
+
+        return $this->jsonSuccessResponse($todo);
     }
 
     public function update()
@@ -30,9 +41,15 @@ class TodoController extends Controller
         //TODO:add update
     }
 
-    public function delete()
+    public function delete(int $id)
     {
-        //TODO:add delete 
+        $todo = $this->service->deleteTodo($id);
+
+        if (!$todo) {
+            return $this->jsonErrorResponse($todo);
+        }
+
+        return $this->jsonSuccessResponse($todo);
     }
 
     public function index()
@@ -46,6 +63,12 @@ class TodoController extends Controller
     public function show(int $id)
     {
         $todo = $this->service->getTodoUsingId($id);
+
+        if (!$todo) {
+            return $this->jsonErrorResponse($todo);
+        }
+
+        return $this->jsonSuccessResponse($todo);
     }
 
     public function updateStatus(Request $request, int $id)
@@ -53,17 +76,9 @@ class TodoController extends Controller
         $todo = $this->service->updateStatusFinish($request, $id);
 
         if (!$todo) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Request Failed!',
-                'code' => 500
-            ]);
+            return $this->jsonErrorResponse($todo);
         }
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Request Success!',
-            'code' => 200
-        ]);
+        return $this->jsonSuccessResponse($todo);
     }
 }

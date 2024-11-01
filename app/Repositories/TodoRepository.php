@@ -36,4 +36,20 @@ class TodoRepository
 
         return $todo->update(['is_finish' => $status]);
     }
+
+    public function storeNewTodo($todo)
+    {
+        return $this->model->create($todo);
+    }
+
+    public function deleteTodo(int $id)
+    {
+        $todo = $this->getTodosUsingId($id);
+
+        if (!$todo) {
+            return false;
+        }
+
+        return $todo->delete();
+    }
 }
