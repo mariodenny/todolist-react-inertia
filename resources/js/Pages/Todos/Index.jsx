@@ -44,7 +44,7 @@ export default function Index({ todos: initialTodos }) {
     };
 
     const handleUpdateTodo = async (id, todos) => {
-        //TODO:add update
+        //TODO:add update, add modal for update
     }
 
     const handleUpdateTodoToFinish = async (id) => {
