@@ -53,7 +53,7 @@ class TodoRepository
         return $todo->delete();
     }
 
-    public function updateTodoById($id, $todo)
+    public function updateTodoById($id, $todoUpdated)
     {
         $todo = $this->getTodosUsingId($id);
 
@@ -62,9 +62,9 @@ class TodoRepository
         }
 
         return $todo->update([
-            'task_name' => $todo->task_name,
-            'description' => $todo->description,
-            'updated_at' => $todo->updated_at
+            'task_name' => $todoUpdated['task_name'],
+            'description' => $todoUpdated['description'],
+            'updated_at' => $todoUpdated['updated_at']
         ]);
     }
 }

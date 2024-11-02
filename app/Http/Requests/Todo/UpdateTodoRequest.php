@@ -22,8 +22,8 @@ class UpdateTodoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'task_name' => 'nullable|string',
-            'description' => 'nullable|string',
+            'task_name' => 'required|string',
+            'description' => 'required|string',
             'is_finish' => 'nullable|between:0,1'
         ];
     }
