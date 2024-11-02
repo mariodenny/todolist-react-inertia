@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Todo\StoreTodoRequest;
+use App\Http\Requests\Todo\UpdateTodoRequest;
 use App\Models\Todo;
 use App\Services\TodoService;
 use App\Trait\InertiaRender;
@@ -36,9 +37,15 @@ class TodoController extends Controller
         return $this->jsonSuccessResponse($todo);
     }
 
-    public function update()
+    public function update(int $id, UpdateTodoRequest $request)
     {
-        //TODO:add update
+        $todo = $this->service->createUpdateTodoData($id, $request);
+
+        if (!$todo) {
+            return $this->jsonErrorResponse($todo);
+        }
+
+        return $this->jsonSuccessResponse($todo);
     }
 
     public function delete(int $id)

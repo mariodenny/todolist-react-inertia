@@ -7,7 +7,6 @@ export default function Layout({ children }) {
                 <nav className="flex space-x-4">
                     <Link href="/" className="hover:text-gray-400">Home</Link>
                     <Link href="/todos" className="hover:text-gray-400">Todos</Link>
-                    {/* <Link href="/contact" className="hover:text-gray-400">Contact</Link> */}
                 </nav>
             </header>
 
@@ -16,7 +15,7 @@ export default function Layout({ children }) {
             </main>
 
             <footer className="bg-gray-800 text-white p-4 text-center">
-                &copy; 2024 MyApp
+                &copy; 2024 github.com/mariodenny
             </footer>
         </div>
     );

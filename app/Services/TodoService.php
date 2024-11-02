@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\Todo\StoreTodoRequest;
+use App\Http\Requests\Todo\UpdateTodoRequest;
 use App\Repositories\TodoRepository;
 
 class TodoService
@@ -49,5 +50,16 @@ class TodoService
     public function deleteTodo(int $id)
     {
         return $this->repository->deleteTodo($id);
+    }
+
+    public function createUpdateTodoData(int $id, UpdateTodoRequest $request)
+    {
+        $todo = [
+            'task_name' => $request->task_name,
+            'description' => $request->description,
+            'updated_at' => now(),
+        ];
+
+        return $this->repository->updateTodoById($id, $todo);
     }
 }

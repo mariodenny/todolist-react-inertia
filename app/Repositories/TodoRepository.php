@@ -52,4 +52,19 @@ class TodoRepository
 
         return $todo->delete();
     }
+
+    public function updateTodoById($id, $todo)
+    {
+        $todo = $this->getTodosUsingId($id);
+
+        if (!$todo) {
+            return false;
+        }
+
+        return $todo->update([
+            'task_name' => $todo->task_name,
+            'description' => $todo->description,
+            'updated_at' => $todo->updated_at
+        ]);
+    }
 }
