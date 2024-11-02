@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import TodoModal from "./TodoModal";
 
+
 export default function Index({ todos: initialTodos }) {
     const [todos, setTodos] = useState(initialTodos || []);
     const [message, setMessage] = useState("");
@@ -44,15 +45,15 @@ export default function Index({ todos: initialTodos }) {
         try {
             const response = await axios.put(`/todos/${id}`, todoUpdated);
             if (response.data.code === 200) {
-                setLoading(true);
-                setMessage("Todo updated successfully!");
+                const updatedTodo = response.data.data;
 
-                setTimeout(async () => {
-                    const todosResponse = await axios.get('/todos');
-                    setTodos(todosResponse.data.data);
-                    setLoading(false);
-                    setIsModalOpen(false);
-                }, 1000);
+                const updatedTodos = todos.map((todo) =>
+                    todo.id === id ? { ...todo, ...todoUpdated } : todo
+                );
+
+                setTodos(updatedTodos);
+                setMessage("Todo updated successfully!");
+                setIsModalOpen(false);
             } else {
                 setMessage("Failed to update todo!");
             }
@@ -61,6 +62,7 @@ export default function Index({ todos: initialTodos }) {
             setMessage("Failed to update todo!");
         }
     };
+
 
     const handleUpdateTodoToFinish = async (id) => {
         try {
