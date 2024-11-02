@@ -45,7 +45,6 @@ export default function Index({ todos: initialTodos }) {
         try {
             const response = await axios.put(`/todos/${id}`, todoUpdated);
             if (response.data.code === 200) {
-                const updatedTodo = response.data.data;
 
                 const updatedTodos = todos.map((todo) =>
                     todo.id === id ? { ...todo, ...todoUpdated } : todo
