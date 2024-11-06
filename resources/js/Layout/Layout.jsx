@@ -7,6 +7,7 @@ export default function Layout({ children }) {
                 <nav className="flex space-x-4">
                     <Link href="/" className="hover:text-gray-400">Home</Link>
                     <Link href="/todos" className="hover:text-gray-400">Todos</Link>
+                    <Link href="/user/login" className="hover:text-gray-400">Task assignment</Link>
                 </nav>
             </header>
 
